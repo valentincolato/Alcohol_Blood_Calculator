@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     EditText cant_ing_input;
     EditText graduacion_input;
     EditText peso_input;
+    EditText time_input;
     TextView alcohol_output;
     Button submitButton,calcular,borrar;
     /////////////////////
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         cant_ing_input = (EditText) findViewById(R.id.input_cant);
         graduacion_input = (EditText) findViewById(R.id.input_g);
         peso_input = (EditText) findViewById(R.id.input_peso);
+        time_input = (EditText) findViewById(R.id.input_time);
         alcohol_output = (TextView) findViewById(R.id.grado_alcohol);
         submitButton = (Button) findViewById(R.id.add_drink);
         borrar = (Button) findViewById(R.id.borrar);
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, bebidas);
         listview.setAdapter(adapter);
 
-        Toast toast1 = Toast.makeText(getApplicationContext(), "Los resultados de esta aplicacion son aproximados", Toast.LENGTH_SHORT);
+        Toast toast1 = Toast.makeText(getApplicationContext(), "The results of this application are approximate", Toast.LENGTH_SHORT);
         toast1.setGravity(Gravity.CENTER,0 ,3 );
 
         toast1.show();
@@ -67,10 +69,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                drink = new Drink(bebida_input.getText().toString(),Double.valueOf(graduacion_input.getText().toString()),Integer.valueOf(cant_ing_input.getText().toString()));
-                bebidas.add(drink.getNombre() +" "+drink.getCant_ing()+ "ml");
-                drinks.add(drink);
-                listview.setAdapter(adapter);
+                String nombre = bebida_input.getText().toString();
+                String graduacion = graduacion_input.getText().toString();
+                String cant = cant_ing_input.getText().toString();
+                if(nombre.length() == 0){
+                    Toast.makeText(getApplicationContext(), "Debes de ingresar un nombre", Toast.LENGTH_LONG).show();
+                }
+                if(graduacion.length() == 0){
+                    Toast.makeText(getApplicationContext(), "Debes de ingresar una graduacion", Toast.LENGTH_LONG).show();
+                }
+                if(cant.length() == 0){
+                    Toast.makeText(getApplicationContext(), "Debes de ingresar una cantidad", Toast.LENGTH_LONG).show();
+                }
+
+                if(nombre.length() != 0 && graduacion.length() != 0 && cant.length() != 0){
+                    Toast.makeText(getApplicationContext(), "drink added successfully...", Toast.LENGTH_LONG).show();
+                    drink = new Drink(nombre,Double.valueOf(graduacion),Integer.valueOf(cant));
+                    bebidas.add(drink.getNombre() +" "+drink.getCant_ing()+ "ml");
+                    drinks.add(drink);
+                    listview.setAdapter(adapter);
+                }
+
 
 
 
@@ -84,23 +103,38 @@ public class MainActivity extends AppCompatActivity {
                 RadioButton radioButton = (RadioButton) findViewById(R.id.radio_masculino);
                 boolean esMasculino = radioButton.isChecked();
                 String p =peso_input.getText().toString();
+                String t = time_input.getText().toString();
+                if(p.length() == 0){
+                    Toast.makeText(getApplicationContext(), "Debes de ingresar un peso", Toast.LENGTH_LONG).show();
+                }
+                if(t.length() == 0){
+                    Toast.makeText(getApplicationContext(), "Debes de ingresar un tiempo", Toast.LENGTH_LONG).show();
+                }
+                if(p.length() != 0 && t.length() != 0){
+                    Toast.makeText(getApplicationContext(), "Calculo en proceso...", Toast.LENGTH_LONG).show();
                     Double peso = Double.valueOf(p);
 
-                Double alcohol_p = alcohol_puro(drinks);
-                Double alcohol;
-                if (esMasculino) {
-                    alcohol = alcohol_p / (peso * 0.7);
-                } else {
-                    alcohol = alcohol_p / (peso * 0.5);}
+                    Double alcohol_p = alcohol_puro(drinks);
+                    Double alcohol;
+                    if (esMasculino) {
+                        alcohol = alcohol_p / (peso * 0.73);
+                    } else {
+                        alcohol = alcohol_p / (peso * 0.66);}
+
+                    alcohol = alcohol - (0.15 * Double.valueOf(time_input.getText().toString()));
+                    if(alcohol<0){
+                        alcohol= Double.valueOf(0);
+                    }
 
 
-
-
-                    Toast toast1 = Toast.makeText(getApplicationContext(), "GRADO DE ALCOHOLEMIA EN " + alcohol, Toast.LENGTH_LONG);
+                    Toast toast1 = Toast.makeText(getApplicationContext(), "blood alcohol concentration: " + alcohol, Toast.LENGTH_LONG);
                     toast1.setGravity(Gravity.CENTER, 0, 3);
 
                     toast1.show();
-                    alcohol_output.setText("GRADO DE ALCOHOLEMIA EN " + alcohol);
+                    alcohol_output.setText("blood alcohol concentration: " + alcohol);
+                }
+
+
                 }
 
 

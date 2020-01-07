@@ -17,22 +17,38 @@
         android:layout_marginTop="3dp"
         android:orientation="vertical">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="105dp"
-            android:layout_height="31dp"
-            android:text="Agregar bebida"
-            tools:layout_editor_absoluteX="33dp"
-            tools:layout_editor_absoluteY="24dp" />
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="105dp"
+                android:layout_height="31dp"
+                android:text="Add drink"
+                tools:layout_editor_absoluteX="33dp"
+                tools:layout_editor_absoluteY="24dp" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="200dp"
+                android:text="To start you need to enter the drinks you consumed with their respective data"
+                android:textSize="12sp" />
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/input_nombre"
-            android:layout_width="171dp"
+            android:layout_width="178dp"
             android:layout_height="42dp"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="4dp"
             android:ems="10"
-            android:hint="Nombre(Cerveza)"
+            android:hint="Drink(beer)"
             android:inputType="textPersonName"
             android:selectAllOnFocus="false"
             android:textSize="14sp"
@@ -41,19 +57,19 @@
 
         <EditText
             android:id="@+id/input_g"
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Graduacion(8%)"
+            android:hint="Graduation(8%)"
             android:inputType="numberDecimal"
             android:textSize="14sp" />
 
         <EditText
             android:id="@+id/input_cant"
-            android:layout_width="178dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Cantidad ingerida(250 ml)"
+            android:hint="Volume drinked(250 ml)"
             android:inputType="number"
             android:textSize="14sp" />
 
@@ -61,7 +77,7 @@
             android:id="@+id/add_drink"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
-            android:text="Agregar" />
+            android:text="Add drink" />
 
         <LinearLayout
             android:layout_width="291dp"
@@ -72,25 +88,25 @@
                 android:layout_width="196dp"
                 android:layout_height="38dp"
                 android:layout_marginTop="8dp"
-                android:text="Bebidas"
+                android:text="Drink's"
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@+id/input_cant"
                 tools:layout_editor_absoluteX="0dp" />
 
             <Button
                 android:id="@+id/borrar"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
+                android:layout_width="98dp"
+                android:layout_height="match_parent"
                 android:layout_alignStart="@+id/linear1"
-                android:text="borrar" />
+                android:text="Delete" />
 
         </LinearLayout>
 
 
         <ListView
             android:id="@+id/lv1"
-            android:layout_width="329dp"
-            android:layout_height="201dp"
+            android:layout_width="318dp"
+            android:layout_height="171dp"
             android:background="@color/color_list"
             android:visibility="visible"
             tools:layout_editor_absoluteX="52dp"
@@ -110,14 +126,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
                 android:checked="true"
-                android:text="Masculino" />
+                android:text="Male" />
 
             <RadioButton
                 android:id="@+id/radio_femenino"
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Femenino" />
+                android:text="Female" />
 
 
         </RadioGroup>
@@ -127,12 +143,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Peso(45kg)"
-            android:inputType="textPersonName" />
+            android:hint="Weight(45kg)"
+            android:inputType="numberSigned|number"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/input_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Time passed(1 Hour)"
+            android:inputType="numberDecimal"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/grado_alcohol"
-            android:layout_width="267dp"
+            android:layout_width="392dp"
             android:layout_height="32dp"
             android:enabled="true" />
 
@@ -143,7 +169,7 @@
             android:layout_alignStart="@+id/linear1"
             android:layout_alignEnd="@+id/linear1"
             android:layout_alignBottom="@+id/linear1"
-            android:text="calcular" />
+            android:text="CALCULATE" />
 
 
     </LinearLayout>
